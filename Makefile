@@ -6,7 +6,7 @@
 #    By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/06 17:04:20 by mkoyamba          #+#    #+#              #
-#    Updated: 2024/01/11 14:26:47 by mkoyamba         ###   ########.fr        #
+#    Updated: 2024/01/11 14:31:34 by mkoyamba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ SRC += madatory/parsing.cpp\
 SRC +=	bonus/open.cpp\
 
 #CLASSES
-SRC += ../includes/classes/Cube.cpp
+SRC += classes/Cube.cpp\
 
 #          ----------========== {     OBJS     } ==========----------
 
