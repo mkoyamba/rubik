@@ -6,7 +6,7 @@
 #    By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/06 17:04:20 by mkoyamba          #+#    #+#              #
-#    Updated: 2024/01/11 14:31:34 by mkoyamba         ###   ########.fr        #
+#    Updated: 2024/01/11 14:56:10 by mkoyamba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,13 +25,13 @@ SRC_DIR = srcs
 SRC =	main.cpp\
 
 #MANDATORY
-SRC += madatory/parsing.cpp\
+SRC += parsing.cpp\
 
 #BONUS
-SRC +=	bonus/open.cpp\
+SRC +=	open.cpp\
 
 #CLASSES
-SRC += classes/Cube.cpp\
+SRC += Cube.cpp\
 
 #          ----------========== {     OBJS     } ==========----------
 

@@ -6,12 +6,14 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 17:09:10 by mkoyamba          #+#    #+#             */
-/*   Updated: 2024/01/11 14:20:12 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2024/01/11 14:44:56 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/rubik.hpp"
 
 int	main(int argc, char **argv) {
-	
+	(void)argc;
+	(void)argv;
+	parsing();
 }
