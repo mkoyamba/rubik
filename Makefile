@@ -6,7 +6,7 @@
 #    By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/06 17:04:20 by mkoyamba          #+#    #+#              #
-#    Updated: 2024/01/11 14:56:10 by mkoyamba         ###   ########.fr        #
+#    Updated: 2024/01/12 08:09:04 by mkoyamba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 
 NAME = rubik
 CC = c++
-FLAGS = -Wall -Wextra -Werror -std=c++98
+FLAGS = -Wall -Wextra -Werror -std=c++11
 INCLUDE = -I includes
 
 #          ----------========== {     SRCS     } ==========----------
@@ -25,13 +25,14 @@ SRC_DIR = srcs
 SRC =	main.cpp\
 
 #MANDATORY
-SRC += parsing.cpp\
+SRC +=	parsing.cpp\
+		print.cpp\
 
 #BONUS
 SRC +=	open.cpp\
 
 #CLASSES
-SRC += Cube.cpp\
+SRC +=	Cube.cpp\
 
 #          ----------========== {     OBJS     } ==========----------
 

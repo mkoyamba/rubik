@@ -6,88 +6,48 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:20:04 by mkoyamba          #+#    #+#             */
-/*   Updated: 2024/01/11 15:41:06 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2024/01/12 10:17:41 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/rubik.hpp"
 
-void	print_color(char c) {
-	if (c == 'W')
-		std::cout << NONE << " ■ ";
-	else if (c == 'R')
-		std::cout << RED << " ■ ";
-	else if (c == 'B')
-		std::cout << BLUE << " ■ ";
-	else if (c == 'G')
-		std::cout << GREEN << " ■ ";
-	else if (c == 'Y')
-		std::cout << YELLOW << " ■ ";
-	else if (c == 'O')
-		std::cout << PURPLE << " ■ ";
-	
+static bool	isValidMove(const std::string &move) {
+	std::string	instructions[] = {
+		"U", "U'", "D", "D'", "R", "R'", "L", "L'", "F", "F'", "B", "B'",
+		"u", "r", "f", "d", "l", "b", "M", "m", "E", "e", "S", "s", "x", "y", "z"
+	};
+
+	for (int i = 0; i < 27; i++) {
+		if (move == instructions[i])
+			return true;
+	}
+	return false;
 }
 
-void	print_rubik(Cube &cube) {
-	std::vector<std::vector<char> >	face = cube.getFace(FACE_UP);
+static bool	isValidShuffle(const std::string &shuffle) {
+	std::vector<std::string>	splitted;
+	std::istringstream			stream(shuffle);
+	std::string					str;
 
-	for (int n = 0; n < cube.getSize(); n++) {
-		for (int i = 0; i < cube.getSize(); i++)
-			std::cout << "   ";
-		std::cout << "   ";
-		for (int i = 0; i < cube.getSize(); i++) {
-			print_color(face[n][i]);
-		}
-		std::cout << std::endl;
+	while (std::getline(stream, str, ' ')) {
+		if (str.c_str()[0] != '\0')
+			splitted.push_back(str);
 	}
-	std::cout << "\n" << std::endl;
-
-	for (int n = 0; n < cube.getSize(); n++) {
-		face = cube.getFace(FACE_LEFT);
-		for (int i = 0; i < cube.getSize(); i++) {
-			print_color(face[n][i]);
-		}
-		std::cout << "   ";
-		face = cube.getFace(FACE_FRONT);
-		for (int i = 0; i < cube.getSize(); i++) {
-			print_color(face[n][i]);
-		}
-		std::cout << "   ";
-		face = cube.getFace(FACE_RIGHT);
-		for (int i = 0; i < cube.getSize(); i++) {
-			print_color(face[n][i]);
-		}
-		std::cout << std::endl;
+	for (size_t i = 0; i < splitted.size(); i++) {
+		if (!isValidMove(splitted[i]))
+			return false;
 	}
-	std::cout << "\n" << std::endl;
-
-	face = cube.getFace(FACE_DOWN);
-	for (int n = 0; n < cube.getSize(); n++) {
-		for (int i = 0; i < cube.getSize(); i++)
-			std::cout << "   ";
-		std::cout << "   ";
-		for (int i = 0; i < cube.getSize(); i++) {
-			print_color(face[n][i]);
-		}
-		std::cout << std::endl;
-	}
-	std::cout << "\n" << std::endl;
-
-	face = cube.getFace(FACE_BACK);
-	for (int n = 0; n < cube.getSize(); n++) {
-		for (int i = 0; i < cube.getSize(); i++)
-			std::cout << "   ";
-		std::cout << "   ";
-		for (int i = 0; i < cube.getSize(); i++) {
-			print_color(face[n][i]);
-		}
-		std::cout << std::endl;
-	}
+	return true;
 }
 
-void	parsing() {
-	int size = 3;
-
-	Cube cube(size);
+void	parsing(const std::string &shuffle, int size) {
+	if (!isValidShuffle(shuffle)) {
+		std::cerr << "Instructions has to be like \"U D\' r b d...\"" << std::endl;
+		exit(1);
+	}
+	Cube cube(size, shuffle);
+	print_rubik(cube);
+	std::cout << "\n\n\n===========\n\n\n" << std::endl;
 	print_rubik(cube);
 }
