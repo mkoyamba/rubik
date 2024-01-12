@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:20:04 by mkoyamba          #+#    #+#             */
-/*   Updated: 2024/01/12 11:07:14 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2024/01/12 16:15:21 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static bool	isValidMove(const std::string &move) {
 	std::string	instructions[] = {
 		"U", "U'", "D", "D'", "R", "R'", "L", "L'", "F", "F'", "B", "B'",
-		"u", "r", "f", "d", "l", "b", "M", "m", "E", "e", "S", "s", "x", "y", "z"
+		"u", "r", "f", "d", "l", "b", "m", "e", "s"
 	};
 
 	for (int i = 0; i < 27; i++) {
@@ -51,4 +51,8 @@ void	parsing(const std::string &shuffle, int size) {
 		exit(1);
 	}
 	Cube cube(size, shuffle);
+	print_rubik(cube);
+	std::cout << "\n\n" << std::endl;
+	cube.moveDprime();
+	print_rubik(cube);
 }

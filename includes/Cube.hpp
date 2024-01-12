@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:27:35 by mkoyamba          #+#    #+#             */
-/*   Updated: 2024/01/12 11:00:39 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2024/01/12 16:10:07 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ class Cube {
 		void							moveU();
 		void							moveUprime();
 		void							moveD();
-		// void							MoveDprime();
+		void							moveDprime();
 
 	private:
 		std::vector<std::vector<char> > cube[6];
