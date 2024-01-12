@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:27:12 by mkoyamba          #+#    #+#             */
-/*   Updated: 2024/01/12 10:16:11 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2024/01/12 11:03:20 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ Cube::Cube(int size, const std::string &shuffle) {
 			this->cube[face].push_back(row);
 		}
 	}
+	this->cube[FACE_UP][0][0] = 'B';
 	while (std::getline(stream, str, ' ')) {
 		if (str.c_str()[0] != '\0')
 			this->shuffle.push_back(str);
@@ -65,4 +66,8 @@ void	Cube::moveUprime() {
 void	Cube::moveU() {
 	for (int i = 0; i < 3; i++)
 		this->moveUprime();
+}
+
+void	Cube::moveD() {
+
 }

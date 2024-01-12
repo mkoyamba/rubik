@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:20:04 by mkoyamba          #+#    #+#             */
-/*   Updated: 2024/01/12 10:17:41 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2024/01/12 11:07:14 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,13 @@ static bool	isValidShuffle(const std::string &shuffle) {
 }
 
 void	parsing(const std::string &shuffle, int size) {
+	if (size < 2 || size > 5) {
+		std::cerr << "Size has to be between 2 and 5." << std::endl;
+		exit(1);
+	}
 	if (!isValidShuffle(shuffle)) {
 		std::cerr << "Instructions has to be like \"U D\' r b d...\"" << std::endl;
 		exit(1);
 	}
 	Cube cube(size, shuffle);
-	print_rubik(cube);
-	std::cout << "\n\n\n===========\n\n\n" << std::endl;
-	print_rubik(cube);
 }
