@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:20:04 by mkoyamba          #+#    #+#             */
-/*   Updated: 2024/01/12 16:15:21 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2024/01/12 15:33:18 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,5 @@ void	parsing(const std::string &shuffle, int size) {
 	Cube cube(size, shuffle);
 	print_rubik(cube);
 	std::cout << "\n\n" << std::endl;
-	cube.moveDprime();
 	print_rubik(cube);
 }

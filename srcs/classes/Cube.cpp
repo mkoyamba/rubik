@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:27:12 by mkoyamba          #+#    #+#             */
-/*   Updated: 2024/01/12 16:22:16 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2024/01/12 15:32:04 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../../includes/rubik.hpp"
 
 Cube::Cube(int size, const std::string &shuffle) {
-	char				colors[7] = "WRBGYO";
+	char				colors[7] = "YBRGWO";
 	std::istringstream	stream(shuffle);
 	std::string			str;
 
@@ -28,12 +28,6 @@ Cube::Cube(int size, const std::string &shuffle) {
 			this->cube[face].push_back(row);
 		}
 	}
-	this->cube[FACE_DOWN][0][0] = 'B';
-	this->cube[FACE_DOWN][0][1] = 'B';
-	this->cube[FACE_DOWN][0][2] = 'B';
-	this->cube[FACE_DOWN][2][0] = 'R';
-	this->cube[FACE_DOWN][2][1] = 'R';
-	this->cube[FACE_DOWN][2][2] = 'R';
 	while (std::getline(stream, str, ' ')) {
 		if (str.c_str()[0] != '\0')
 			this->shuffle.push_back(str);
@@ -74,10 +68,10 @@ void	Cube::moveU() {
 }
 
 void	Cube::moveDprime() {
-	std::vector<char>	temp = this->cube[FACE_LEFT][0];
+	std::vector<char>	temp = this->cube[FACE_LEFT][this->size - 1];
 
-	this->cube[FACE_LEFT][0] = this->cube[FACE_FRONT][0];
-	this->cube[FACE_FRONT][0] = this->cube[FACE_RIGHT][0];
+	this->cube[FACE_LEFT][this->size - 1] = this->cube[FACE_FRONT][this->size - 1];
+	this->cube[FACE_FRONT][this->size - 1] = this->cube[FACE_RIGHT][this->size - 1];
 	for (int i = 0; i < this->size; i++) {
 		this->cube[FACE_RIGHT][this->size - 1][i] = this->cube[FACE_BACK][0][this->size - 1 - i];
 	}
