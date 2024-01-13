@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:27:12 by mkoyamba          #+#    #+#             */
-/*   Updated: 2024/01/12 15:32:04 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2024/01/13 11:47:40 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,32 @@ Cube::Cube(int size, const std::string &shuffle) {
 	}
 }
 
-void	Cube::moveUprime() {
+void	Cube::rotateFacePrime(int face) {
+	std::vector<char>	temp;
+
+	for (int n = 0; n < this->size/2; n++) {
+		temp = this->cube[face][n];
+		for (int i = n; i < this->size - n; i++) {
+			this->cube[face][n][i] = this->cube[face][i][this->size - 1 - n];
+		}
+		for (int i = n; i < this->size - n; i++) {
+			this->cube[face][i][this->size - 1 - n] = this->cube[face][this->size - 1 - n][this->size - 1 - i];
+		}
+		for (int i = n; i < this->size - n; i++) {
+			this->cube[face][this->size - 1 - n][this->size - 1 - i] = this->cube[face][this->size - 1 - i][n];
+		}
+		for (int i = n; i < this->size - n; i++) {
+			this->cube[face][i][n] = temp[this->size - 1 - i];
+		}
+	}
+}
+
+void	Cube::rotateFace(int face) {
+	for (int i = 0; i < 3; i++)
+		this->rotateFacePrime(face);
+}
+
+void	Cube::moveUprime(bool mode) {
 	std::vector<char>	temp = this->cube[FACE_RIGHT][0];
 
 	this->cube[FACE_RIGHT][0] = this->cube[FACE_FRONT][0];
@@ -45,29 +70,19 @@ void	Cube::moveUprime() {
 	for (int i = 0; i < this->size; i++) {
 		this->cube[FACE_BACK][this->size - 1][this->size - 1 - i] = temp[i];
 	}
-	for (int n = 0; n < this->size/2; n++) {
-		temp = this->cube[FACE_UP][n];
-		for (int i = n; i < this->size - n; i++) {
-			this->cube[FACE_UP][n][i] = this->cube[FACE_UP][i][this->size - 1 - n];
-		}
-		for (int i = n; i < this->size - n; i++) {
-			this->cube[FACE_UP][i][this->size - 1 - n] = this->cube[FACE_UP][this->size - 1 - n][this->size - 1 - i];
-		}
-		for (int i = n; i < this->size - n; i++) {
-			this->cube[FACE_UP][this->size - 1 - n][this->size - 1 - i] = this->cube[FACE_UP][this->size - 1 - i][n];
-		}
-		for (int i = n; i < this->size - n; i++) {
-			this->cube[FACE_UP][i][n] = temp[this->size - 1 - i];
-		}
-	}
+	rotateFacePrime(FACE_UP);
+	if(mode == SOLUTION) 
+		this->solution.push_back("U'");
 }
 
-void	Cube::moveU() {
+void	Cube::moveU(bool mode) {
 	for (int i = 0; i < 3; i++)
-		this->moveUprime();
+		this->moveUprime(SHUFFLE);
+	if(mode == SOLUTION) 
+		this->solution.push_back("U");
 }
 
-void	Cube::moveDprime() {
+void	Cube::moveDprime(bool mode) {
 	std::vector<char>	temp = this->cube[FACE_LEFT][this->size - 1];
 
 	this->cube[FACE_LEFT][this->size - 1] = this->cube[FACE_FRONT][this->size - 1];
@@ -78,24 +93,87 @@ void	Cube::moveDprime() {
 	for (int i = 0; i < this->size; i++) {
 		this->cube[FACE_BACK][0][this->size - 1 - i] = temp[i];
 	}
-	for (int n = 0; n < this->size/2; n++) {
-		temp = this->cube[FACE_DOWN][n];
-		for (int i = n; i < this->size - n; i++) {
-			this->cube[FACE_DOWN][n][i] = this->cube[FACE_DOWN][i][this->size - 1 - n];
-		}
-		for (int i = n; i < this->size - n; i++) {
-			this->cube[FACE_DOWN][i][this->size - 1 - n] = this->cube[FACE_DOWN][this->size - 1 - n][this->size - 1 - i];
-		}
-		for (int i = n; i < this->size - n; i++) {
-			this->cube[FACE_DOWN][this->size - 1 - n][this->size - 1 - i] = this->cube[FACE_DOWN][this->size - 1 - i][n];
-		}
-		for (int i = n; i < this->size - n; i++) {
-			this->cube[FACE_DOWN][i][n] = temp[this->size - 1 - i];
-		}
-	}
+	rotateFacePrime(FACE_DOWN);
+	if(mode == SOLUTION) 
+		this->solution.push_back("D'");
 }
 
-void	Cube::moveD() {
+void	Cube::moveD(bool mode) {
 	for (int i = 0; i < 3; i++)
-		this->moveDprime();
+		this->moveDprime(SHUFFLE);
+	if(mode == SOLUTION) 
+		this->solution.push_back("D");
+}
+
+void	Cube::moveR(bool mode) {
+	std::vector<char>	temp = this->cube[FACE_UP][this->size - 1];
+
+	for (int i = 0; i < this->size ; i++) {
+		this->cube[FACE_UP][this->size - 1][i] = this->cube[FACE_LEFT][this->size - 1 - i][this->size -1];
+	}
+	for (int i = 0; i < this->size ; i++) {
+		this->cube[FACE_LEFT][i][this->size - 1] = this->cube[FACE_DOWN][0][i];
+	}
+	for (int i = 0; i < this->size ; i++) {
+		this->cube[FACE_DOWN][0][i] = this->cube[FACE_RIGHT][this->size - 1 - i][0];
+	}
+	for (int i = 0; i < this->size ; i++) {
+		this->cube[FACE_RIGHT][i][0] = temp[i];
+	}
+	rotateFace(FACE_FRONT);
+	if(mode == SOLUTION) 
+		this->solution.push_back("R");
+}
+
+void	Cube::moveRprime(bool mode) {
+	for (int i = 0; i < 3; i++)
+		this->moveR(SHUFFLE);
+	rotateFacePrime(FACE_FRONT);
+	if(mode == SOLUTION) 
+		this->solution.push_back("R'");
+}
+
+void	Cube::moveL(bool mode) {
+	std::vector<char>	temp;
+
+	if(mode == SOLUTION) 
+		this->solution.push_back("L");
+}
+
+void	Cube::moveLprime(bool mode) {
+	for (int i = 0; i < 3; i++)
+		this->moveL(SHUFFLE);
+	
+	if(mode == SOLUTION) 
+		this->solution.push_back("L'");
+}
+
+void	Cube::moveF(bool mode) {
+	std::vector<char>	temp;
+
+	if(mode == SOLUTION) 
+		this->solution.push_back("F");
+}
+
+void	Cube::moveFprime(bool mode) {
+	for (int i = 0; i < 3; i++)
+		this->moveF(SHUFFLE);
+	
+	if(mode == SOLUTION) 
+		this->solution.push_back("F'");
+}
+
+void	Cube::moveB(bool mode) {
+	std::vector<char>	temp;
+
+	if(mode == SOLUTION) 
+		this->solution.push_back("B");
+}
+
+void	Cube::moveBprime(bool mode) {
+	for (int i = 0; i < 3; i++)
+		this->moveB(SHUFFLE);
+	
+	if(mode == SOLUTION) 
+		this->solution.push_back("B'");
 }

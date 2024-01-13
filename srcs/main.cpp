@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 17:09:10 by mkoyamba          #+#    #+#             */
-/*   Updated: 2024/01/12 08:11:14 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2024/01/13 12:24:41 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,3 +34,6 @@ int	main(int argc, char **argv) {
 	}
 	return 0;
 }
+
+// https://www.francocube.com/notation
+// https://www.francocube.com/ofapel/sommaire3x3x3
